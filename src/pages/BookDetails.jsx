@@ -136,10 +136,10 @@ const BookDetails = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-gray-800 mx-auto mb-4"></div>
-          <p className="text-gray-700 font-medium">Loading book details...</p>
+          <div className="animate-spin rounded-full h-12 w-12 sm:h-16 sm:w-16 border-b-2 border-gray-800 mx-auto mb-4"></div>
+          <p className="text-gray-700 font-medium text-sm sm:text-base">Loading book details...</p>
         </div>
       </div>
     );
@@ -147,12 +147,13 @@ const BookDetails = () => {
 
   if (error || !book) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Book not found</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">Book not found</h2>
           <button 
             onClick={() => navigate('/')}
-            className="bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors"
+            className="bg-gray-800 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg hover:bg-gray-700 transition-colors text-sm sm:text-base"
+            type="button"
           >
             Back to Home
           </button>
@@ -163,130 +164,134 @@ const BookDetails = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+      {/* Header - Responsive */}
       <header className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex items-center justify-between">
             <button 
               onClick={() => navigate('/')}
-              className="text-sm font-medium text-gray-600 hover:text-gray-800 transition-colors"
+              className="text-xs sm:text-sm font-medium text-gray-600 hover:text-gray-800 transition-colors"
+              type="button"
             >
               BookFinder
             </button>
-            <nav className="flex items-center space-x-8">
-              <span className="text-sm font-medium text-gray-800">Book Listing</span>
+            <nav className="hidden sm:flex items-center space-x-8">
+              <span className="text-xs sm:text-sm font-medium text-gray-800">Book Listing</span>
             </nav>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-4">
               <button 
                 onClick={handleDownload}
-                className={`text-sm font-medium transition-colors ${
+                className={`text-xs sm:text-sm font-medium transition-colors ${
                   isDownloaded ? 'text-green-600 hover:text-green-700' : 'text-gray-800 hover:text-gray-600'
                 }`}
+                type="button"
               >
-                {isDownloaded ? '✅ DOWNLOADED' : '📥 DOWNLOAD'}
+                <span className="hidden sm:inline">{isDownloaded ? '✅ DOWNLOADED' : '📥 DOWNLOAD'}</span>
+                <span className="sm:hidden">{isDownloaded ? '✅' : '📥'}</span>
               </button>
               <button 
                 onClick={handleAddToCollection}
-                className={`text-sm font-medium transition-colors ${
+                className={`text-xs sm:text-sm font-medium transition-colors ${
                   isInCollection ? 'text-blue-600 hover:text-blue-700' : 'text-gray-800 hover:text-gray-600'
                 }`}
+                type="button"
               >
-                {isInCollection ? '📚 IN COLLECTION' : '➕ MY COLLECTION'}
+                <span className="hidden sm:inline">{isInCollection ? '📚 IN COLLECTION' : '➕ MY COLLECTION'}</span>
+                <span className="sm:hidden">{isInCollection ? '📚' : '➕'}</span>
               </button>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Main Content with Enhanced 3D Book */}
-      <main className="max-w-7xl mx-auto px-6 py-12">
+      {/* Main Content - Fully Responsive */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 p-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 p-4 sm:p-8 lg:p-12">
             
-            {/* Left Column - Enhanced Large 3D Book */}
+            {/* Left Column - Enhanced Large 3D Book - Responsive */}
             <div className="lg:col-span-1">
               <div className="relative">
-                {/* Reduced red background container */}
-                <div className="bg-red-400/60 p-6 rounded-lg backdrop-blur-sm">
-                  {/* Larger Book Display Container */}
+                {/* Responsive background container */}
+                <div className="bg-red-400/60 p-4 sm:p-6 rounded-lg backdrop-blur-sm">
+                  {/* Responsive Book Display Container */}
                   <div className="flex items-center justify-center">
-                    {/* Enhanced Large 3D Book */}
-                    <div className="relative" style={{ perspective: '1200px' }}>
-                      {/* Main Book - Larger Size */}
+                    {/* Enhanced Responsive 3D Book */}
+                    <div className="relative" style={{ perspective: '800px' }}>
+                      {/* Main Book - Responsive Size */}
                       <div className="relative group cursor-pointer">
-                        {/* Enhanced Book Spine */}
+                        {/* Enhanced Book Spine - Responsive */}
                         <div 
                           className="absolute left-0 top-0 bg-gray-800 shadow-xl"
                           style={{
-                            width: '40px',
-                            height: '380px',
-                            transform: 'rotateY(-90deg) translateZ(20px)',
+                            width: '20px',
+                            height: '240px',
+                            transform: 'rotateY(-90deg) translateZ(10px)',
                             transformOrigin: 'left center',
                             background: 'linear-gradient(to bottom, #1f2937, #374151, #4b5563, #1f2937)'
                           }}
                         >
-                          {/* Enhanced Spine Text */}
-                          <div className="h-full flex items-center justify-center p-2">
+                          {/* Enhanced Spine Text - Responsive */}
+                          <div className="h-full flex items-center justify-center p-1">
                             <div 
-                              className="text-white text-sm font-bold transform -rotate-90 whitespace-nowrap"
-                              style={{ fontSize: '12px', letterSpacing: '1.5px' }}
+                              className="text-white text-xs font-bold transform -rotate-90 whitespace-nowrap"
+                              style={{ fontSize: '8px', letterSpacing: '1px' }}
                             >
-                              {book.title.slice(0, 25).toUpperCase()}
+                              {book.title.slice(0, 20).toUpperCase()}
                             </div>
                           </div>
                         </div>
 
-                        {/* Enhanced Book Cover - Larger & Clearer */}
+                        {/* Enhanced Book Cover - Responsive */}
                         <div 
-                          className="relative bg-white shadow-2xl overflow-hidden group-hover:shadow-3xl transition-all duration-700 transform group-hover:scale-110"
+                          className="relative bg-white shadow-2xl overflow-hidden group-hover:shadow-3xl transition-all duration-700 transform group-hover:scale-105 sm:group-hover:scale-110"
                           style={{
-                            width: '280px',
-                            height: '380px',
-                            transform: 'translateZ(20px) rotateY(8deg)',
+                            width: '180px',
+                            height: '240px',
+                            transform: 'translateZ(10px) rotateY(8deg)',
                             borderRadius: '0 6px 6px 0'
                           }}
                         >
-                          {/* High Quality Book Cover Image */}
+                          {/* Responsive Book Cover Image */}
                           <img 
                             src={book.coverUrl} 
                             alt={book.title}
                             className="w-full h-full object-cover filter brightness-110 contrast-110"
                             style={{
-                              imageRendering: 'crisp-edges',
-                              imageResolution: '300dpi'
+                              imageRendering: 'crisp-edges'
                             }}
                             onError={(e) => {
                               // Enhanced fallback cover
                               const canvas = document.createElement('canvas');
-                              canvas.width = 280;
-                              canvas.height = 380;
+                              canvas.width = 180;
+                              canvas.height = 240;
                               const ctx = canvas.getContext('2d');
                               
                               // Enhanced gradient background
-                              const gradient = ctx.createLinearGradient(0, 0, 0, 380);
+                              const gradient = ctx.createLinearGradient(0, 0, 0, 240);
                               gradient.addColorStop(0, '#1f2937');
                               gradient.addColorStop(0.5, '#374151');
                               gradient.addColorStop(1, '#1f2937');
                               ctx.fillStyle = gradient;
-                              ctx.fillRect(0, 0, 280, 380);
+                              ctx.fillRect(0, 0, 180, 240);
                               
                               // Enhanced title
                               ctx.fillStyle = 'white';
-                              ctx.font = 'bold 20px Arial';
+                              ctx.font = 'bold 14px Arial';
                               ctx.textAlign = 'center';
                               const titleWords = book.title.split(' ');
                               titleWords.slice(0, 4).forEach((word, index) => {
-                                ctx.fillText(word, 140, 160 + (index * 30));
+                                ctx.fillText(word, 90, 100 + (index * 20));
                               });
                               
                               // Enhanced author
-                              ctx.font = '16px Arial';
-                              ctx.fillText(book.author, 140, 280);
+                              ctx.font = '12px Arial';
+                              ctx.fillText(book.author, 90, 180);
                               
                               // Enhanced decoration
                               ctx.strokeStyle = 'white';
                               ctx.lineWidth = 2;
-                              ctx.strokeRect(20, 20, 240, 340);
+                              ctx.strokeRect(15, 15, 150, 210);
                               
                               e.target.src = canvas.toDataURL();
                             }}
@@ -297,47 +302,47 @@ const BookDetails = () => {
                             className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                           ></div>
 
-                          {/* Enhanced Rating Badge */}
-                          <div className="absolute top-6 right-6 bg-white/95 backdrop-blur-md rounded-xl px-3 py-2 shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
-                            <div className="flex items-center space-x-2">
-                              <span className="text-yellow-500 text-sm">⭐</span>
-                              <span className="text-sm font-bold text-gray-800">{book.rating}</span>
+                          {/* Enhanced Rating Badge - Responsive */}
+                          <div className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-white/95 backdrop-blur-md rounded-lg sm:rounded-xl px-2 sm:px-3 py-1 sm:py-2 shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
+                            <div className="flex items-center space-x-1 sm:space-x-2">
+                              <span className="text-yellow-500 text-xs sm:text-sm">⭐</span>
+                              <span className="text-xs sm:text-sm font-bold text-gray-800">{book.rating}</span>
                             </div>
                           </div>
 
-                          {/* Enhanced Page indicator */}
-                          <div className="absolute bottom-6 left-6 bg-black/70 backdrop-blur-md rounded-xl px-4 py-2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
-                            <span className="text-white text-sm font-semibold">{book.pages} pages</span>
+                          {/* Enhanced Page indicator - Responsive */}
+                          <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 bg-black/70 backdrop-blur-md rounded-lg sm:rounded-xl px-2 sm:px-3 py-1 sm:py-2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
+                            <span className="text-white text-xs sm:text-sm font-semibold">{book.pages} pages</span>
                           </div>
                         </div>
 
-                        {/* Enhanced Book Pages Stack Effect */}
+                        {/* Enhanced Book Pages Stack Effect - Responsive */}
                         <div 
-                          className="absolute top-2 left-2 bg-gray-100 shadow-lg"
+                          className="absolute top-1 left-1 bg-gray-100 shadow-lg"
                           style={{
-                            width: '278px',
-                            height: '378px',
-                            transform: 'translateZ(18px) rotateY(8deg)',
+                            width: '178px',
+                            height: '238px',
+                            transform: 'translateZ(8px) rotateY(8deg)',
                             borderRadius: '0 6px 6px 0',
                             zIndex: -1
                           }}
                         ></div>
                         <div 
-                          className="absolute top-4 left-4 bg-gray-200 shadow-md"
+                          className="absolute top-2 left-2 bg-gray-200 shadow-md"
                           style={{
-                            width: '276px',
-                            height: '376px',
-                            transform: 'translateZ(16px) rotateY(8deg)',
+                            width: '176px',
+                            height: '236px',
+                            transform: 'translateZ(6px) rotateY(8deg)',
                             borderRadius: '0 6px 6px 0',
                             zIndex: -2
                           }}
                         ></div>
                         <div 
-                          className="absolute top-6 left-6 bg-gray-300 shadow-sm"
+                          className="absolute top-3 left-3 bg-gray-300 shadow-sm"
                           style={{
-                            width: '274px',
-                            height: '374px',
-                            transform: 'translateZ(14px) rotateY(8deg)',
+                            width: '174px',
+                            height: '234px',
+                            transform: 'translateZ(4px) rotateY(8deg)',
                             borderRadius: '0 6px 6px 0',
                             zIndex: -3
                           }}
@@ -347,21 +352,21 @@ const BookDetails = () => {
                   </div>
                 </div>
                 
-                {/* Enhanced Preview Label */}
-                <div className="absolute bottom-6 left-6">
-                  <div className="flex items-center space-x-3">
-                    <span className="text-sm font-medium text-white bg-black/40 backdrop-blur-md px-4 py-2 rounded-full shadow-lg">
+                {/* Enhanced Preview Label - Responsive */}
+                <div className="absolute bottom-3 sm:bottom-6 left-3 sm:left-6">
+                  <div className="flex items-center space-x-2 sm:space-x-3">
+                    <span className="text-xs sm:text-sm font-medium text-white bg-black/40 backdrop-blur-md px-2 sm:px-4 py-1 sm:py-2 rounded-full shadow-lg">
                       📖 PREVIEW AVAILABLE
                     </span>
-                    <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-lg"></div>
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-400 rounded-full animate-pulse shadow-lg"></div>
                   </div>
                 </div>
 
-                {/* Enhanced Status Badge */}
-                <div className="absolute top-6 right-6">
-                  <div className="bg-white/95 backdrop-blur-md rounded-xl px-4 py-2 shadow-xl">
-                    <div className="flex items-center space-x-2">
-                      <span className="text-green-500 text-sm">●</span>
+                {/* Enhanced Status Badge - Responsive */}
+                <div className="absolute top-3 sm:top-6 right-3 sm:right-6">
+                  <div className="bg-white/95 backdrop-blur-md rounded-lg sm:rounded-xl px-2 sm:px-4 py-1 sm:py-2 shadow-xl">
+                    <div className="flex items-center space-x-1 sm:space-x-2">
+                      <span className="text-green-500 text-xs sm:text-sm">●</span>
                       <span className="text-xs font-bold text-gray-800">AVAILABLE</span>
                     </div>
                   </div>
@@ -369,91 +374,91 @@ const BookDetails = () => {
               </div>
             </div>
 
-            {/* Middle Column - Book Details */}
-            <div className="lg:col-span-1 space-y-6">
-              {/* Title and Author */}
+            {/* Middle Column - Book Details - Responsive */}
+            <div className="lg:col-span-1 space-y-4 sm:space-y-6">
+              {/* Title and Author - Responsive */}
               <div>
-                <h1 className="text-4xl font-bold text-gray-900 leading-tight mb-4">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-3 sm:mb-4">
                   {book.title}
                 </h1>
-                <p className="text-xl font-medium text-gray-600 mb-8">
+                <p className="text-lg sm:text-xl font-medium text-gray-600 mb-4 sm:mb-8">
                   by {book.author}
                 </p>
                 
-                {/* Status Display */}
-                <div className="flex items-center space-x-4 mb-8">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                {/* Status Display - Responsive */}
+                <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4 sm:mb-8">
+                  <span className="inline-flex items-center px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium bg-green-100 text-green-800">
                     📚 Available for Reading
                   </span>
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                  <span className="inline-flex items-center px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium bg-blue-100 text-blue-800">
                     📱 Digital Format
                   </span>
                 </div>
                 
-                {/* Enhanced Description */}
-                <div className="prose prose-lg text-gray-700 leading-relaxed space-y-6">
-                  <p className="font-medium italic text-indigo-600 text-lg">
+                {/* Enhanced Description - Responsive */}
+                <div className="prose prose-sm sm:prose-lg text-gray-700 leading-relaxed space-y-3 sm:space-y-6 max-w-none">
+                  <p className="font-medium italic text-indigo-600 text-base sm:text-lg">
                     Diminutive rooms, grand possibilities. Small homes.
                   </p>
-                  <p className="text-base">
+                  <p className="text-sm sm:text-base">
                     Grand Living shows how to make use of a limited space and turn a small apartment into a design marvel.
                   </p>
-                  <p className="text-base">
+                  <p className="text-sm sm:text-base">
                     More contemporary David Graeber explores the phenomenon of conventional wisdom: he shows that believe there was money there was debt, for more than 5,000 years, since the beginnings of the first agrarian empires, humans have used elaborate credit systems to buy and sell goods—that is, long before the invention of coins or cash.
                   </p>
                 </div>
               </div>
 
-              {/* Enhanced Book Information Grid */}
-              <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 shadow-inner">
-                <h4 className="font-bold text-gray-800 mb-6 text-lg">Book Details</h4>
-                <div className="grid grid-cols-1 gap-4 text-sm">
+              {/* Enhanced Book Information Grid - Responsive */}
+              <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-4 sm:p-6 shadow-inner">
+                <h4 className="font-bold text-gray-800 mb-4 sm:mb-6 text-base sm:text-lg">Book Details</h4>
+                <div className="grid grid-cols-1 gap-3 sm:gap-4 text-xs sm:text-sm">
                   <div className="flex justify-between items-center py-2 border-b border-gray-200">
                     <span className="font-semibold text-gray-600">Edition</span>
-                    <span className="text-gray-900 font-bold">BookFinder Edition</span>
+                    <span className="text-gray-900 font-bold text-right">BookFinder Edition</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-200">
                     <span className="font-semibold text-gray-600">Features</span>
-                    <span className="text-gray-900">{book.features || 'Full-color 256 pages'}</span>
+                    <span className="text-gray-900 text-right">{book.features || 'Full-color 256 pages'}</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-200">
                     <span className="font-semibold text-gray-600">Release Date</span>
-                    <span className="text-gray-900">{book.publishYear}</span>
+                    <span className="text-gray-900 text-right">{book.publishYear}</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-200">
                     <span className="font-semibold text-gray-600">Language</span>
-                    <span className="text-gray-900">{book.language}</span>
+                    <span className="text-gray-900 text-right">{book.language}</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-200">
                     <span className="font-semibold text-gray-600">Format</span>
-                    <span className="text-gray-900">{book.format || '21 x 26 cm'}</span>
+                    <span className="text-gray-900 text-right">{book.format || '21 x 26 cm'}</span>
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="font-semibold text-gray-600">ISBN</span>
-                    <span className="text-gray-900 font-mono text-xs bg-gray-200 px-2 py-1 rounded">{book.isbn}</span>
+                    <span className="text-gray-900 font-mono text-xs bg-gray-200 px-2 py-1 rounded text-right">{book.isbn}</span>
                   </div>
                 </div>
               </div>
 
-              {/* Enhanced Reviewer Section */}
-              <div className="border-t-2 border-gray-200 pt-8">
-                <h4 className="font-bold text-gray-800 mb-6 text-lg">Featured Review</h4>
-                <div className="flex items-start space-x-5">
-                  <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center shadow-xl flex-shrink-0">
-                    <span className="text-white text-lg font-bold">CK</span>
+              {/* Enhanced Reviewer Section - Responsive */}
+              <div className="border-t-2 border-gray-200 pt-4 sm:pt-8">
+                <h4 className="font-bold text-gray-800 mb-4 sm:mb-6 text-base sm:text-lg">Featured Review</h4>
+                <div className="flex items-start space-x-3 sm:space-x-5">
+                  <div className="w-10 h-10 sm:w-14 sm:h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center shadow-xl flex-shrink-0">
+                    <span className="text-white text-sm sm:text-lg font-bold">CK</span>
                   </div>
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-4 mb-3">
-                      <h5 className="text-base font-bold text-gray-900">Christopher Booth</h5>
-                      <div className="flex text-yellow-400 text-lg">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-3">
+                      <h5 className="text-sm sm:text-base font-bold text-gray-900">Christopher Booth</h5>
+                      <div className="flex text-yellow-400 text-sm sm:text-lg">
                         ⭐⭐⭐⭐⭐
                       </div>
                       <span className="text-xs text-gray-500 bg-green-100 px-2 py-1 rounded-full">Verified Reader</span>
                     </div>
-                    <p className="text-base text-gray-700 leading-relaxed bg-gradient-to-r from-gray-50 to-blue-50 p-5 rounded-xl border-l-4 border-blue-500">
+                    <p className="text-sm sm:text-base text-gray-700 leading-relaxed bg-gradient-to-r from-gray-50 to-blue-50 p-3 sm:p-5 rounded-xl border-l-4 border-blue-500">
                       "I didn't really finish reading this book. I'm not qualified to review this Shit."
                     </p>
-                    <div className="flex items-center space-x-6 mt-4 text-sm text-gray-500">
+                    <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-6 mt-3 sm:mt-4 text-xs sm:text-sm text-gray-500">
                       <span className="flex items-center space-x-1">
                         <span>👍</span>
                         <span>Helpful (12)</span>
@@ -468,33 +473,33 @@ const BookDetails = () => {
               </div>
             </div>
 
-            {/* Right Column - Enhanced Related Books & Actions */}
+            {/* Right Column - Enhanced Related Books & Actions - Responsive */}
             <div className="lg:col-span-1">
-              <div className="space-y-8">
+              <div className="space-y-4 sm:space-y-8">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-bold text-gray-900">MORE LIKE THIS</h3>
-                  <span className="text-sm bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-semibold">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900">MORE LIKE THIS</h3>
+                  <span className="text-xs sm:text-sm bg-purple-100 text-purple-700 px-2 sm:px-3 py-1 rounded-full font-semibold">
                     {relatedBooks.length} books
                   </span>
                 </div>
                 
-                {/* Enhanced Related Books */}
+                {/* Enhanced Related Books - Responsive */}
                 {relatedBooks.map((relatedBook, index) => (
                   <div 
                     key={relatedBook.id}
                     onClick={() => handleRelatedBookClick(relatedBook)}
                     className="cursor-pointer group"
                   >
-                    <div className="flex items-center space-x-5 p-5 rounded-2xl hover:bg-gradient-to-r hover:from-gray-50 hover:to-purple-50 transition-all duration-400 border border-transparent hover:border-purple-200 hover:shadow-lg">
-                      <div className="w-16 h-24 flex-shrink-0 relative">
-                        {/* Enhanced mini 3D book */}
+                    <div className="flex items-center space-x-3 sm:space-x-5 p-3 sm:p-5 rounded-2xl hover:bg-gradient-to-r hover:from-gray-50 hover:to-purple-50 transition-all duration-400 border border-transparent hover:border-purple-200 hover:shadow-lg">
+                      <div className="w-12 h-16 sm:w-16 sm:h-24 flex-shrink-0 relative">
+                        {/* Enhanced mini 3D book - Responsive */}
                         <div 
-                          className="relative transform group-hover:scale-125 transition-transform duration-400"
+                          className="relative transform group-hover:scale-110 sm:group-hover:scale-125 transition-transform duration-400"
                           style={{ perspective: '200px' }}
                         >
                           {/* Enhanced mini spine */}
                           <div 
-                            className="absolute left-0 top-0 h-full w-3 bg-gradient-to-b from-gray-600 to-gray-800 shadow-lg"
+                            className="absolute left-0 top-0 h-full w-2 sm:w-3 bg-gradient-to-b from-gray-600 to-gray-800 shadow-lg"
                             style={{
                               transform: 'rotateY(-90deg) translateZ(2px)',
                               transformOrigin: 'left center'
@@ -517,23 +522,23 @@ const BookDetails = () => {
                         </div>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className="text-base font-bold text-gray-900 group-hover:text-purple-700 transition-colors line-clamp-2 mb-2">
+                        <h4 className="text-sm sm:text-base font-bold text-gray-900 group-hover:text-purple-700 transition-colors line-clamp-2 mb-1 sm:mb-2">
                           {relatedBook.title}
                         </h4>
-                        <p className="text-sm text-gray-600 mb-3">
+                        <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3">
                           {relatedBook.author}
                         </p>
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm bg-gray-100 text-gray-700 px-3 py-1 rounded-full font-medium">
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
+                          <span className="text-xs sm:text-sm bg-gray-100 text-gray-700 px-2 sm:px-3 py-1 rounded-full font-medium">
                             {relatedBook.category}
                           </span>
-                          <span className="text-sm text-green-600 font-semibold">
+                          <span className="text-xs sm:text-sm text-green-600 font-semibold">
                             📚 Available
                           </span>
                         </div>
                       </div>
                       <div className="text-gray-400 group-hover:text-purple-500 transition-colors">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </div>
@@ -541,41 +546,52 @@ const BookDetails = () => {
                   </div>
                 ))}
 
-                {/* Enhanced Action Buttons */}
-                <div className="pt-8 space-y-4">
+                {/* Enhanced Action Buttons - Responsive */}
+                <div className="pt-4 sm:pt-8 space-y-3 sm:space-y-4">
                   <button 
                     onClick={handleDownload}
-                    className={`w-full py-4 px-6 rounded-2xl font-bold text-base transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl ${
+                    className={`w-full py-3 sm:py-4 px-4 sm:px-6 rounded-2xl font-bold text-sm sm:text-base transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl ${
                       isDownloaded 
                         ? 'bg-gradient-to-r from-green-500 to-green-600 text-white hover:from-green-600 hover:to-green-700' 
                         : 'bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800'
                     }`}
+                    type="button"
                   >
                     {isDownloaded ? '✅ DOWNLOADED' : '📥 DOWNLOAD BOOK'}
                   </button>
                   
                   <button 
                     onClick={handleAddToCollection}
-                    className={`w-full py-4 px-6 rounded-2xl font-bold text-base transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl ${
+                    className={`w-full py-3 sm:py-4 px-4 sm:px-6 rounded-2xl font-bold text-sm sm:text-base transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl ${
                       isInCollection 
                         ? 'bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700' 
                         : 'bg-gradient-to-r from-gray-700 to-gray-800 text-white hover:from-gray-800 hover:to-gray-900'
                     }`}
+                    type="button"
                   >
                     {isInCollection ? '📚 IN MY COLLECTION' : '➕ ADD TO COLLECTION'}
                   </button>
                   
-                  {/* Enhanced Quick Action Grid */}
-                  <div className="grid grid-cols-2 gap-3">
-                    <button className="py-3 px-4 text-sm font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-xl hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 shadow-md hover:shadow-lg">
+                  {/* Enhanced Quick Action Grid - Responsive */}
+                  <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                    <button 
+                      className="py-2 sm:py-3 px-3 sm:px-4 text-xs sm:text-sm font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-xl hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 shadow-md hover:shadow-lg"
+                      type="button"
+                    >
                       📖 Preview
                     </button>
-                    <button className="py-3 px-4 text-sm font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-xl hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 shadow-md hover:shadow-lg">
+                    <button 
+                      className="py-2 sm:py-3 px-3 sm:px-4 text-xs sm:text-sm font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-xl hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 shadow-md hover:shadow-lg"
+                      type="button"
+                    >
                       ❤️ Wishlist
                     </button>
                   </div>
                   
-                  <button className="w-full py-3 px-6 text-base font-semibold text-indigo-600 bg-indigo-50 border-2 border-indigo-200 rounded-xl hover:bg-indigo-100 transition-colors shadow-md hover:shadow-lg">
+                  <button 
+                    className="w-full py-2 sm:py-3 px-4 sm:px-6 text-sm sm:text-base font-semibold text-indigo-600 bg-indigo-50 border-2 border-indigo-200 rounded-xl hover:bg-indigo-100 transition-colors shadow-md hover:shadow-lg"
+                    type="button"
+                  >
                     📚 More by {book.author}
                   </button>
                 </div>

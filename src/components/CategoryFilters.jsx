@@ -12,36 +12,77 @@ const CategoryFilters = ({ onCategorySelect }) => {
     { name: 'History', icon: '🏛️', color: 'from-yellow-500 to-yellow-600', search: 'history world ancient modern' }
   ];
 
+  const handleCategoryClick = (category) => {
+    if (onCategorySelect && typeof onCategorySelect === 'function') {
+      onCategorySelect(category.search);
+    } else {
+      console.warn('⚠️ onCategorySelect is not a valid function');
+    }
+  };
+
+  const handleViewAllClick = () => {
+    // Handle view all categories functionality
+    console.log('View all categories clicked');
+    // You can add navigation or modal logic here
+  };
+
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-8">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">
+    <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 mx-4 sm:mx-0">
+      {/* Header Section - Responsive text sizing */}
+      <div className="text-center mb-6 sm:mb-8">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">
           🎯 Browse by Category
         </h2>
-        <p className="text-gray-600">
+        <p className="text-sm sm:text-base lg:text-lg text-gray-600 px-2 sm:px-0">
           Find specialized resources for your field of study
         </p>
-        <div className="w-24 h-1 bg-indigo-600 mx-auto mt-4 rounded-full"></div>
+        <div className="w-16 sm:w-24 h-1 bg-indigo-600 mx-auto mt-3 sm:mt-4 rounded-full"></div>
       </div>
       
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {/* Responsive Grid - Optimized for all screen sizes */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
         {categories.map((category) => (
           <button
             key={category.name}
-            onClick={() => onCategorySelect(category.search)}
-            className="group relative overflow-hidden rounded-xl p-6 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            onClick={() => handleCategoryClick(category)}
+            className="group relative overflow-hidden rounded-xl p-4 sm:p-5 lg:p-6 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+            type="button"
+            aria-label={`Browse ${category.name} books`}
           >
-            <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-90 group-hover:opacity-100 transition-opacity`}></div>
+            {/* Gradient Background */}
+            <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-90 group-hover:opacity-100 transition-opacity duration-300`}></div>
+            
+            {/* Content */}
             <div className="relative z-10">
-              <div className="text-3xl mb-3">{category.icon}</div>
-              <h3 className="text-white font-semibold text-sm">{category.name}</h3>
+              {/* Icon - Responsive sizing */}
+              <div 
+                className="text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3 transform transition-transform duration-300 group-hover:scale-110"
+                role="img"
+                aria-label={`${category.name} icon`}
+              >
+                {category.icon}
+              </div>
+              
+              {/* Category Name - Responsive text */}
+              <h3 className="text-white font-semibold text-xs sm:text-sm lg:text-base leading-tight">
+                {category.name}
+              </h3>
             </div>
+            
+            {/* Hover Effect Overlay */}
+            <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
           </button>
         ))}
       </div>
       
-      <div className="text-center mt-8">
-        <button className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-medium transition-colors">
+      {/* View All Button - Responsive */}
+      <div className="text-center mt-6 sm:mt-8">
+        <button 
+          onClick={handleViewAllClick}
+          className="bg-gray-100 hover:bg-gray-200 active:bg-gray-300 text-gray-700 px-4 py-2 sm:px-6 sm:py-3 rounded-full font-medium text-sm sm:text-base transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
+          type="button"
+          aria-label="View all book categories"
+        >
           View All Categories →
         </button>
       </div>

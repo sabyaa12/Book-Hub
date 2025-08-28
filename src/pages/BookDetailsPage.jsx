@@ -110,10 +110,10 @@ const BookDetailPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-gray-800 mx-auto mb-4"></div>
-          <p className="text-gray-700 font-medium">Loading book details...</p>
+          <div className="animate-spin rounded-full h-12 w-12 sm:h-16 sm:w-16 border-b-2 border-gray-800 mx-auto mb-4"></div>
+          <p className="text-gray-700 font-medium text-sm sm:text-base">Loading book details...</p>
         </div>
       </div>
     );
@@ -121,12 +121,13 @@ const BookDetailPage = () => {
 
   if (error || !book) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Book not found</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">Book not found</h2>
           <button 
             onClick={() => navigate('/')}
-            className="bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors"
+            className="bg-gray-800 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg hover:bg-gray-700 transition-colors text-sm sm:text-base"
+            type="button"
           >
             Back to Home
           </button>
@@ -137,42 +138,45 @@ const BookDetailPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+      {/* Header - Responsive */}
       <header className="bg-white border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-6 py-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex items-center justify-between">
             <button 
               onClick={() => navigate('/')}
-              className="text-sm font-medium text-gray-600 hover:text-gray-800 transition-colors"
+              className="text-xs sm:text-sm font-medium text-gray-600 hover:text-gray-800 transition-colors"
+              type="button"
             >
               gestalten
             </button>
-            <nav className="flex items-center space-x-8">
-              <span className="text-sm font-medium text-gray-800">Book Listing</span>
+            <nav className="hidden sm:flex items-center space-x-8">
+              <span className="text-xs sm:text-sm font-medium text-gray-800">Book Listing</span>
             </nav>
             <button 
               onClick={handleAddToCart}
-              className={`text-sm font-medium transition-colors ${
+              className={`text-xs sm:text-sm font-medium transition-colors ${
                 isInCart ? 'text-red-600 hover:text-red-700' : 'text-gray-800 hover:text-gray-600'
               }`}
+              type="button"
             >
-              {isInCart ? 'REMOVE FROM CART' : 'VIEW CART'}
+              <span className="hidden sm:inline">{isInCart ? 'REMOVE FROM CART' : 'VIEW CART'}</span>
+              <span className="sm:hidden">{isInCart ? 'REMOVE' : 'CART'}</span>
             </button>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-6 py-12">
+      {/* Main Content - Fully Responsive */}
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 p-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 p-4 sm:p-8 lg:p-12">
             
-            {/* Left Column - Book Cover */}
+            {/* Left Column - Book Cover - Responsive */}
             <div className="lg:col-span-1">
               <div className="relative">
-                {/* Red background container matching the design */}
-                <div className="bg-red-500 p-8 rounded-lg">
-                  <div className="bg-white p-4 rounded shadow-lg transform rotate-1 hover:rotate-0 transition-transform duration-300">
+                {/* Red background container matching the design - Responsive */}
+                <div className="bg-red-500 p-4 sm:p-6 lg:p-8 rounded-lg">
+                  <div className="bg-white p-2 sm:p-3 lg:p-4 rounded shadow-lg transform rotate-1 hover:rotate-0 transition-transform duration-300">
                     <img 
                       src={book.coverUrl} 
                       alt={book.title}
@@ -184,8 +188,8 @@ const BookDetailPage = () => {
                   </div>
                 </div>
                 
-                {/* "Back Cover" label */}
-                <div className="absolute bottom-4 left-4">
+                {/* "Back Cover" label - Responsive */}
+                <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4">
                   <span className="text-xs font-medium text-white bg-black bg-opacity-20 px-2 py-1 rounded">
                     BACK THE PREVIEW
                   </span>
@@ -193,71 +197,71 @@ const BookDetailPage = () => {
               </div>
             </div>
 
-            {/* Middle Column - Book Details */}
-            <div className="lg:col-span-1 space-y-8">
-              {/* Title and Author */}
+            {/* Middle Column - Book Details - Responsive */}
+            <div className="lg:col-span-1 space-y-4 sm:space-y-6 lg:space-y-8">
+              {/* Title and Author - Responsive */}
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 leading-tight mb-2">
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight mb-2">
                   {book.title}
                 </h1>
-                <p className="text-lg font-medium text-gray-600 mb-6">
+                <p className="text-base sm:text-lg font-medium text-gray-600 mb-4 sm:mb-6">
                   by {book.author}
                 </p>
                 
-                {/* Description */}
-                <div className="prose prose-sm text-gray-700 leading-relaxed">
-                  <p className="mb-4 font-medium italic">
+                {/* Description - Responsive */}
+                <div className="prose prose-sm sm:prose-base text-gray-700 leading-relaxed max-w-none">
+                  <p className="mb-3 sm:mb-4 font-medium italic text-sm sm:text-base">
                     {book.category && `${book.category} enthusiasts, grand possibilities. Small libraries.`}
                   </p>
-                  <p className="mb-4">
+                  <p className="mb-3 sm:mb-4 text-sm sm:text-base">
                     {book.description || `Grand Living shows how to make use of a limited space and turn a small apartment into a design marvel.`}
                   </p>
-                  <p>
+                  <p className="text-sm sm:text-base">
                     {`More contemporary David Graeber explores the phenomenon of conventional wisdom: he shows that believe there was money there was debt, for more than 5,000 years, since the beginnings of the first agrarian empires, humans have used elaborate credit systems to buy and sell goods—that is, long before the invention of coins or cash.`}
                   </p>
                 </div>
               </div>
 
-              {/* Book Information Grid */}
-              <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-x-8 gap-y-3 text-sm">
-                  <div className="flex justify-between">
+              {/* Book Information Grid - Responsive */}
+              <div className="space-y-3 sm:space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-2 sm:gap-y-3 text-xs sm:text-sm">
+                  <div className="flex justify-between py-1 sm:py-0">
                     <span className="font-medium text-gray-500">Edition</span>
                     <span className="text-gray-900">Gestalten</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between py-1 sm:py-0">
                     <span className="font-medium text-gray-500">Features</span>
                     <span className="text-gray-900">Full-color 256 pages</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between py-1 sm:py-0">
                     <span className="font-medium text-gray-500">Release Date</span>
                     <span className="text-gray-900">{book.publishYear || 'May 2017'}</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between py-1 sm:py-0">
                     <span className="font-medium text-gray-500">Language</span>
                     <span className="text-gray-900">{book.language || 'English'}</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between py-1 sm:py-0">
                     <span className="font-medium text-gray-500">Format</span>
                     <span className="text-gray-900">21 x 26 cm</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between py-1 sm:py-0">
                     <span className="font-medium text-gray-500">ISBN</span>
-                    <span className="text-gray-900">{book.isbn || '978-3-89955-616-9'}</span>
+                    <span className="text-gray-900 font-mono text-xs">{book.isbn || '978-3-89955-616-9'}</span>
                   </div>
                 </div>
               </div>
 
-              {/* Reviewer Section */}
-              <div className="border-t border-gray-100 pt-6">
+              {/* Reviewer Section - Responsive */}
+              <div className="border-t border-gray-100 pt-4 sm:pt-6">
                 <div className="flex items-start space-x-3">
-                  <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center">
-                    <span className="text-white text-sm font-medium">CK</span>
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-800 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-xs sm:text-sm font-medium">CK</span>
                   </div>
-                  <div>
-                    <p className="text-sm font-medium text-gray-900 mb-1">Reviewed By</p>
-                    <p className="text-sm text-gray-600 mb-2">Christopher Booth</p>
-                    <p className="text-sm text-gray-700 leading-relaxed">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs sm:text-sm font-medium text-gray-900 mb-1">Reviewed By</p>
+                    <p className="text-xs sm:text-sm text-gray-600 mb-2">Christopher Booth</p>
+                    <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
                       "I didn't really finish reading this book. I'm not qualified to review this Shit."
                     </p>
                   </div>
@@ -265,10 +269,10 @@ const BookDetailPage = () => {
               </div>
             </div>
 
-            {/* Right Column - Related Books */}
+            {/* Right Column - Related Books - Responsive */}
             <div className="lg:col-span-1">
-              <div className="space-y-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-6">MORE LIKE THIS</h3>
+              <div className="space-y-4 sm:space-y-6">
+                <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-4 sm:mb-6">MORE LIKE THIS</h3>
                 
                 {relatedBooks.map((relatedBook, index) => (
                   <div 
@@ -276,8 +280,8 @@ const BookDetailPage = () => {
                     onClick={() => handleRelatedBookClick(relatedBook)}
                     className="cursor-pointer group"
                   >
-                    <div className="flex items-center space-x-4 p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                      <div className="w-16 h-20 flex-shrink-0">
+                    <div className="flex items-center space-x-3 sm:space-x-4 p-2 sm:p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                      <div className="w-12 h-16 sm:w-16 sm:h-20 flex-shrink-0">
                         <img 
                           src={relatedBook.coverUrl} 
                           alt={relatedBook.title}
@@ -288,10 +292,10 @@ const BookDetailPage = () => {
                         />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className="text-sm font-bold text-gray-900 group-hover:text-gray-700 transition-colors line-clamp-2">
+                        <h4 className="text-xs sm:text-sm font-bold text-gray-900 group-hover:text-gray-700 transition-colors line-clamp-2 mb-1">
                           {relatedBook.title}
                         </h4>
-                        <p className="text-xs text-gray-600 mt-1">
+                        <p className="text-xs text-gray-600">
                           {relatedBook.author}
                         </p>
                       </div>
@@ -299,15 +303,16 @@ const BookDetailPage = () => {
                   </div>
                 ))}
 
-                {/* Add to Cart Button */}
-                <div className="pt-6">
+                {/* Add to Cart Button - Responsive */}
+                <div className="pt-4 sm:pt-6">
                   <button 
                     onClick={handleAddToCart}
-                    className={`w-full py-3 px-6 rounded-lg font-medium text-sm transition-all duration-200 ${
+                    className={`w-full py-2 sm:py-3 px-4 sm:px-6 rounded-lg font-medium text-xs sm:text-sm transition-all duration-200 ${
                       isInCart 
                         ? 'bg-red-500 text-white hover:bg-red-600' 
                         : 'bg-gray-900 text-white hover:bg-gray-800'
                     }`}
+                    type="button"
                   >
                     {isInCart ? 'REMOVE FROM CART' : 'ADD TO CART'}
                   </button>

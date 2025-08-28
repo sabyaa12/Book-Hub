@@ -12,20 +12,24 @@ import BookDetails from './pages/BookDetails';
 
 function App() {
   return (
-    <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/category/:categoryName" element={<CategoryPage />} />
-          <Route path="/book/:bookId" element={<BookDetails />} />
-          <Route path="/collection" element={<CollectionPage />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
-          <Route path="/downloads" element={<DownloadsPage />} />
-          <Route path="/support" element={<SupportPage />} />
-        </Routes>
-      </Layout>
-    </Router>
+    <div className="min-h-screen bg-gray-50">
+      <Router>
+        <Layout>
+          <div className="w-full">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/category/:categoryName" element={<CategoryPage />} />
+              <Route path="/book/:bookId" element={<BookDetails />} />
+              <Route path="/collection" element={<CollectionPage />} />
+              <Route path="/favorites" element={<FavoritesPage />} />
+              <Route path="/downloads" element={<DownloadsPage />} />
+              <Route path="/support" element={<SupportPage />} />
+            </Routes>
+          </div>
+        </Layout>
+      </Router>
+    </div>
   );
 }
 
