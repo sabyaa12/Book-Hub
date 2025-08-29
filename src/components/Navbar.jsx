@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom'; // ✅ ADD useLocation
 
 const Navbar = ({ sidebarOpen, setSidebarOpen, onToggleSidebar }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation(); // ✅ ADD THIS LINE
 
   const categories = [
     { name: 'Computer Science', slug: 'computer-science', search: 'computer science programming software' },
@@ -81,16 +82,32 @@ const Navbar = ({ sidebarOpen, setSidebarOpen, onToggleSidebar }) => {
     setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
   };
 
+  // ✅ ENHANCED: Logo click handler with search clearing
   const handleLogoClick = () => {
     navigate('/');
+    setIsDropdownOpen(false);
+    setIsProfileOpen(false);
     setIsMobileMenuOpen(false);
+    
+    // ✅ NEW: Clear search if on home page
+    if (location.pathname === '/') {
+      window.dispatchEvent(new CustomEvent('clearSearch'));
+    }
+    
     // ✅ Immediate scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // ✅ ENHANCED: Home button click handler with search clearing
   const handleHomeClick = () => {
     navigate('/');
+    setIsDropdownOpen(false);
+    setIsProfileOpen(false);
     setIsMobileMenuOpen(false);
+    
+    // ✅ NEW: Clear search when navigating home
+    window.dispatchEvent(new CustomEvent('clearSearch'));
+    
     // ✅ Immediate scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -217,10 +234,10 @@ const Navbar = ({ sidebarOpen, setSidebarOpen, onToggleSidebar }) => {
                 </button>
               )}
 
-              {/* Logo */}
+              {/* ✅ ENHANCED: Logo with search clearing functionality */}
               <button 
                 onClick={handleLogoClick} 
-                className="flex items-center hover:opacity-80 transition-opacity"
+                className="flex items-center hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg p-1"
                 aria-label="Go to homepage"
                 type="button"
               >
@@ -242,14 +259,26 @@ const Navbar = ({ sidebarOpen, setSidebarOpen, onToggleSidebar }) => {
 
             {/* Center - Navigation (Desktop Only) */}
             <div className="hidden lg:flex items-center space-x-8">
+              {/* ✅ ENHANCED: Home button with search clearing and active state */}
               <button 
                 onClick={handleHomeClick}
-                className="text-gray-700 hover:text-indigo-600 transition-colors font-medium relative group"
+                className={`transition-colors font-medium relative group focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded px-2 py-1 ${
+                  location.pathname === '/'
+                    ? 'text-indigo-600'
+                    : 'text-gray-700 hover:text-indigo-600'
+                }`}
                 aria-label="Go to home page"
                 type="button"
               >
-                Home
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                <div className="flex items-center space-x-1">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
+                  <span>Home</span>
+                </div>
+                <span className={`absolute bottom-0 left-0 h-0.5 bg-indigo-600 transition-all duration-300 ${
+                  location.pathname === '/' ? 'w-full' : 'w-0 group-hover:w-full'
+                }`}></span>
               </button>
               
               {/* Categories Dropdown */}
